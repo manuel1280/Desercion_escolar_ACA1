@@ -40,7 +40,7 @@ Modelo de clasificación que estima, para cada estudiante, si terminará en **ab
 | Random Forest | 0,684 |
 | Baseline (clase mayoritaria) | 0,222 |
 
-Los tres primeros son estadísticamente equivalentes (dentro de una desviación estándar). Se eligió Gradient Boosting por tener la CV más alta; la regresión logística es la alternativa más simple y explicable.
+Los tres primeros quedan dentro de una desviación estándar; esto no demuestra equivalencia estadística ni una ventaja concluyente. Se eligió Gradient Boosting por tener la CV más alta; la regresión logística es la alternativa más simple y explicable.
 
 **Modelo final en el test (885 estudiantes)**
 
@@ -66,7 +66,7 @@ Con `USAR_2DO_SEM = False` el modelo usa solo información hasta el 1.er semestr
 | F1 *Enrolled* | 0,511 | 0,465 |
 | AUC (OvR) | 0,885 | 0,858 |
 
-La pérdida es modesta (≈0,03 de F1), pero del mismo orden que la incertidumbre del test: no debe leerse con precisión decimal. [Decisión del grupo sobre qué versión usa la app: pendiente.]
+La pérdida es modesta (≈0,03 de F1), pero del mismo orden que la incertidumbre del test: no debe leerse con precisión decimal. La app usa el artefacto oficial de ambos semestres y permite entrenar una variante experimental de primer semestre en el laboratorio.
 
 ## Estructura del repositorio
 ```
@@ -101,4 +101,44 @@ modelo.predict_proba(fila)             # columnas en el orden de modelo.classes_
 - Con F1 macro ≈0,69 y *Enrolled* en 0,51 sirve como **alerta temprana**, no para decisiones individuales.
 
 ## Referencia
-Martins, M. V., Real, M. B., Machado, J., & Becker, A. (2021). *UCI Predict Students Dropout and Academic Success* [Conjunto de datos]. UCI Machine Learning Repository. https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success
+Realinho, V., Vieira Martins, M., Machado, J., & Baptista, L. (2021). *UCI Predict Students Dropout and Academic Success* [Conjunto de datos]. UCI Machine Learning Repository. https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success
+
+
+## App Streamlit
+
+La app mantiene el pipeline oficial y ofrece cinco vistas:
+
+- **Panorama:** métricas reproducidas del test, distribución del dataset, matriz de confusión, ROC y sensibilidad del umbral.
+- **Simulador:** edición de las 36 variables, probabilidades por clase y descarga del escenario.
+- **Predicción por lotes:** CSV con validación de columnas, valores y consistencia; descarga de resultados.
+- **Laboratorio:** ajuste de tasa de aprendizaje, profundidad, hojas, L2 e iteraciones, con 5 folds sobre train. Opción de primer semestre. El modelo experimental puede usarse para predecir en la misma sesión.
+- **Metodología:** decisiones, resultados y limitaciones del estudio.
+
+### Ejecutar localmente (Python 3.13)
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+streamlit run app.py
+```
+
+### Validar
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m pytest -q
+```
+
+### Desplegar en Streamlit Community Cloud
+
+Seleccionar este repositorio, la rama con la app y `app.py` como archivo principal.
+En **Advanced settings**, elegir **Python 3.13**. No necesita secrets ni servicios de pago.
+El archivo raíz `requirements.txt` instala las versiones del artefacto guardado.
+Guía: https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy
+
+El experimento se guarda solo en la sesión; cambiar controles no lo reentrena hasta pulsar el botón.
+La app no escribe los CSV cargados en disco. Usar archivos anónimos y sin identificadores.
+La ficha y los datos públicos se incluyen para evitar dependencias de red en el arranque.
+
+La revisión técnica y los hallazgos adicionales están en [ANALISIS_PROYECTO.md](ANALISIS_PROYECTO.md).
