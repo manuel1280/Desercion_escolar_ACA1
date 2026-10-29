@@ -29,6 +29,10 @@
 
 La app está preparada para demostración académica en Streamlit Community Cloud. No es un sistema institucional validado de decisiones sobre estudiantes. Para una operación real se requieren validación externa, evaluación temporal, calibración, revisión de equidad y controles de acceso adecuados a los datos que se procesen.
 
+## Verificación
+
+Siete pruebas automatizadas pasan: reproducción de métricas del test, umbral independiente de la clase, validación de entradas y alias UCI, navegación por todas las vistas, entrenamiento preventivo, conservación de las filas originales con avisos y uso del experimento desde el simulador. `pip check` no detecta conflictos. La app se comprobó visualmente en Chrome y el despliegue cargó las métricas oficiales en https://permanencia-aca1.streamlit.app/. La CV con parámetros oficiales también se reproduce: F1 macro medio 0.7306785. Se fija PyArrow 24.0.0, la versión aplicada por Community Cloud al detectar un fallo conocido en 26.0.0.
+
 ## Fuentes
 
 - Notebook, README y artefactos del repositorio original.

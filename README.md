@@ -13,7 +13,7 @@ Modelo de clasificación que estima, para cada estudiante, si terminará en **ab
 - Camilo José Patiño Rodríguez
 
 ## Enlaces
-- App (Streamlit): [pendiente]
+- App (Streamlit): [Permanencia · ACA1](https://permanencia-aca1.streamlit.app/)
 - Video de sustentación: [pendiente]
 - Póster (PDF): [pendiente]
 
@@ -132,7 +132,8 @@ python -m pytest -q
 
 ### Desplegar en Streamlit Community Cloud
 
-Seleccionar este repositorio, la rama con la app y `app.py` como archivo principal.
+Despliegue actual: `manuel1280/Desercion_escolar_ACA1`, rama `main`, archivo `app.py`.
+La copia conserva el origen [Yadkomateo/Desercion_escolar_ACA1](https://github.com/Yadkomateo/Desercion_escolar_ACA1).
 En **Advanced settings**, elegir **Python 3.13**. No necesita secrets ni servicios de pago.
 El archivo raíz `requirements.txt` instala las versiones del artefacto guardado.
 Guía: https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy

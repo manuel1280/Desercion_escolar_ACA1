@@ -2,3 +2,5 @@
 streamlit==1.50.0
 plotly==6.3.1
 threadpoolctl==3.7.0
+# Coincide con la versión estable aplicada por Community Cloud.
+pyarrow==24.0.0
